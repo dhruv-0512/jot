@@ -16,18 +16,19 @@ jot stores your full clipboard history including any sensitive data (passwords, 
 
 ## Installation
 
+## Installation
+
+**Via pip:**
+```bash
+pip install jot-clipboard
+```
+
+**From source:**
 ```bash
 git clone https://github.com/yourusername/jot.git
 cd jot
 pip install -e .
 ```
-
-Then start the daemon:
-
-```bash
-jot daemon start
-```
-
 ## Usage
 
 ```bash
