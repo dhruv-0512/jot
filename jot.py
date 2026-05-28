@@ -191,9 +191,49 @@ def _build_table(rows: list, title: str | None = None) -> Table:
 
 # ── CLI root ───────────────────────────────────────────────────────────────────
 
+_VERSION = "1.0.0"
+
+_INFO = {
+    "name":    "jot",
+    "version": _VERSION,
+    "desc":    "A fast terminal clipboard history manager with image support",
+    "author":  "Dhruv",
+    "email":   "dhruvh3vedi@gmail.com",
+    "github":  "https://github.com/dhruv-0512",
+    "repo":    "https://github.com/dhruv-0512/jot",
+    "license": "MIT",
+}
+
+
+def _show_info(ctx: click.Context, _param: click.Parameter, value: bool) -> None:
+    if not value or ctx.resilient_parsing:
+        return
+    from rich.panel import Panel
+    from rich.text import Text as RichText
+
+    info = RichText()
+    info.append("jot", style="bold cyan")
+    info.append(f"  v{_INFO['version']}\n", style="dim")
+    info.append(f"{_INFO['desc']}\n\n", style="")
+    info.append("Author   ", style="bold")
+    info.append(f"{_INFO['author']}\n")
+    info.append("Email    ", style="bold")
+    info.append(f"{_INFO['email']}\n")
+    info.append("GitHub   ", style="bold")
+    info.append(f"{_INFO['github']}\n")
+    info.append("Repo     ", style="bold")
+    info.append(f"{_INFO['repo']}\n")
+    info.append("License  ", style="bold")
+    info.append(f"{_INFO['license']}")
+
+    console.print(Panel(info, border_style="cyan", padding=(1, 2)))
+    ctx.exit()
+
 
 @click.group()
-@click.version_option("1.0.0", prog_name="jot")
+@click.version_option(_VERSION, prog_name="jot")
+@click.option("--info", is_flag=True, is_eager=True, expose_value=False,
+              callback=_show_info, help="Show project and author info.")
 def cli() -> None:
     """jot — a fast clipboard history manager."""
 
