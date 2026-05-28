@@ -20,7 +20,7 @@ jot stores your full clipboard history including any sensitive data (passwords, 
 
 **Via pip:**
 ```bash
-pip install jot-clipboard
+pip install jot-history
 ```
 
 **From source:**
